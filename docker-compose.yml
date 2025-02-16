@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    news-app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: news-app-container
+        restart: unless-stopped
+        ports:
+            - ${APP_PORT}:${APP_INTERNAL_PORT:-2001}
+        volumes:
+            - .:/var/www/html
+        networks:
+            - default
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+networks:
+    default:
+        name: ${NETWORK_NAME:-news_network}
+        external: true
