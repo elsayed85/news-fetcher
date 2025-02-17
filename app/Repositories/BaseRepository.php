@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\BaseRepositoryInterface;
+use App\Filters\BaseFilter;
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,5 +55,28 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function upsert(array $data, array $uniqueBy, array $update): void
     {
         $this->model->upsert($data, $uniqueBy, $update);
+    }
+
+    public function search(BaseFilter $filter, $with = []): \Illuminate\Support\Collection
+    {
+        return $this->model
+            ->with($with)
+            ->filter($filter)
+            ->latest()
+            ->get();
+    }
+
+    public function searchPaginated(BaseFilter $filter, $perPage = 10, $with = []): \Illuminate\Pagination\LengthAwarePaginator
+    {
+        return $this->model
+            ->with($with)
+            ->filter($filter)
+            ->latest()
+            ->paginate($perPage);
+    }
+
+    public function findById(int $id): ?Article
+    {
+        return $this->model->find($id);
     }
 }

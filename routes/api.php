@@ -1,19 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\News\ArticleController;
+use App\Http\Controllers\News\AuthorController;
+use App\Http\Controllers\News\CategoryController;
+use App\Http\Controllers\News\SourceController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::prefix('v1')->group(function () {
+    Route::get('/articles', [ArticleController::class, 'index']);
+    Route::get('/articles/{id}', [ArticleController::class, 'show']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('/sources', [SourceController::class, 'index']);
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/authors', [AuthorController::class, 'index']);
 });

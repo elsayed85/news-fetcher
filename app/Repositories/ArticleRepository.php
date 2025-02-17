@@ -2,26 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Contracts\Repositories\{
-    ArticleRepositoryInterface,
-    SourceRepositoryInterface,
-    AuthorRepositoryInterface,
-    CategoryRepositoryInterface
-};
+use App\Adapters\Transformers\ArticleDtoTransformer;
+use App\Contracts\Repositories\{ArticleRepositoryInterface};
 use App\Dtos\ArticleDto;
 use App\Models\Article;
-use App\Adapters\Transformers\ArticleDtoTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class ArticleRepository extends BaseRepository implements ArticleRepositoryInterface
 {
     public function __construct(
-        Article                               $model,
-        protected SourceRepositoryInterface   $sourceRepository,
-        protected AuthorRepositoryInterface   $authorRepository,
-        protected CategoryRepositoryInterface $categoryRepository,
-        protected ArticleDtoTransformer       $transformer
+        Article                         $model,
+        protected ArticleDtoTransformer $transformer
     )
     {
         parent::__construct($model);
