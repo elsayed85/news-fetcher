@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\New\Content\ArticleRequest;
 use App\Http\Resources\News\ArticleResource;
 use App\Services\Content\ArticleService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ArticleController extends BaseController
 {
@@ -14,7 +14,7 @@ class ArticleController extends BaseController
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(ArticleRequest $request): JsonResponse
     {
         $articles = $this->articleService->listPaginated($request);
         return $this->successResponse(ArticleResource::collection($articles));

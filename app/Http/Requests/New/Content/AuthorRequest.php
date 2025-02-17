@@ -7,7 +7,7 @@ class AuthorRequest extends BasicRequest
     public function rules(): array
     {
         return [
-            "name" => ['nullable', 'string'],
+            "name" => ['nullable', 'string', 'max:40'],
         ];
     }
 }

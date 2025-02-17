@@ -8,7 +8,7 @@ class CategoryRequest extends BasicRequest
     public function rules(): array
     {
         return [
-            "name" => ['nullable', 'string'],
+            "name" => ['nullable', 'string', 'max:50'],
         ];
     }
 }
