@@ -5,7 +5,6 @@ namespace App\Services\Content;
 use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Dtos\ArticleDto;
 use App\Filters\Content\ArticleFilter;
-use App\Filters\Content\ArticleWithUserPreferenceFilter;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;

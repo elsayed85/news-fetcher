@@ -24,6 +24,6 @@ class JobDispatcherCommand extends BaseCommand
 
     protected function getQueueName(): string
     {
-        return 'news-api';
+        return 'newsApi';
     }
 }
