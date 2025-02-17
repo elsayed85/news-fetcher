@@ -47,4 +47,31 @@ class ArticleFilter extends BaseFilter
             $this->query->whereDate('published_at', '<=', $this->request->input('to_date'));
         }
     }
+
+    protected function filterByWithPreferredSources(): void
+    {
+        $user = $this->getUser();
+        if ($user && $this->request->input('with_preferred_sources')) {
+            $sources = $user->preferredSources()->get()->pluck('id');
+            $this->query->when($sources->isNotEmpty(), fn($q) => $q->whereIn('source_id', $sources));
+        }
+    }
+
+    protected function filterByWithPreferredCategories(): void
+    {
+        $user = $this->getUser();
+        if ($user && $this->request->input('with_preferred_categories')) {
+            $categories = $user->preferredCategories()->get()->pluck('id');
+            $this->query->when($categories->isNotEmpty(), fn($q) => $q->whereIn('category_id', $categories));
+        }
+    }
+
+    protected function filterByWithPreferredAuthors(): void
+    {
+        $user = $this->getUser();
+        if ($user && $this->request->input('with_preferred_authors')) {
+            $authors = $user->preferredAuthors()->get()->pluck('id');
+            $this->query->when($authors->isNotEmpty(), fn($q) => $q->whereIn('author_id', $authors));
+        }
+    }
 }

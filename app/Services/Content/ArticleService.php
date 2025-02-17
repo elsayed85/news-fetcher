@@ -5,6 +5,7 @@ namespace App\Services\Content;
 use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Dtos\ArticleDto;
 use App\Filters\Content\ArticleFilter;
+use App\Filters\Content\ArticleWithUserPreferenceFilter;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -33,7 +34,7 @@ class ArticleService
         return $this->articleRepository->searchPaginated(
             filter: new ArticleFilter($request),
             perPage: $perPage,
-            with: ['source', 'author', 'category']
+            with: ['source', 'author', 'category'],
         );
     }
 

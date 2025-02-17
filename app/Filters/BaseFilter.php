@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Contracts\Filters\FilterInterface;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use ReflectionClass;
@@ -49,5 +50,11 @@ abstract class BaseFilter implements FilterInterface
         }
 
         return array_map(fn($method) => $method->name, $methods);
+    }
+
+
+    protected function getUser(): User|null
+    {
+        return $this->request->user();
     }
 }
