@@ -4,7 +4,10 @@ namespace App\Services\Content;
 
 use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Dtos\ArticleDto;
+use App\Filters\Content\ArticleFilter;
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleService
 {
@@ -25,8 +28,17 @@ class ArticleService
         return $this->articleRepository->storeMultiple($dtos);
     }
 
-    public function getArticles(): array
+    public function listPaginated(Request $request, $perPage = 10): LengthAwarePaginator
     {
-        return $this->articleRepository->all();
+        return $this->articleRepository->searchPaginated(
+            filter: new ArticleFilter($request),
+            perPage: $perPage,
+            with: ['source', 'author', 'category']
+        );
+    }
+
+    public function show(int $id)
+    {
+        return $this->articleRepository->find($id);
     }
 }

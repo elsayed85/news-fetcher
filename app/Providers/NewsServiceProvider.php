@@ -27,9 +27,6 @@ class NewsServiceProvider extends ServiceProvider
         $this->app->bind(ArticleRepositoryInterface::class, function ($app) {
             return new ArticleRepository(
                 new Article(),
-                $app->make(SourceRepositoryInterface::class),
-                $app->make(AuthorRepositoryInterface::class),
-                $app->make(CategoryRepositoryInterface::class),
                 $app->make(ArticleDtoTransformer::class)
             );
         });

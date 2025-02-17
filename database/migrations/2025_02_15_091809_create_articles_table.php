@@ -38,6 +38,7 @@ return new class extends Migration {
                 ->nullOnDelete();
 
             $table->timestamp('published_at')->index();
+            $table->timestamps();
         });
     }
 

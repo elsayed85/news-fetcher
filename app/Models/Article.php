@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Filterable;
+use App\Traits\HasWhereLike;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
-    public $timestamps = false;
+    use Filterable, HasWhereLike;
+
+    public $timestamps = true;
     protected $casts = [
         'published_at' => 'datetime',
     ];
@@ -24,21 +27,21 @@ class Article extends Model
         'published_at',
     ];
 
-    public function author() : BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class)->withDefault([
             'name' => 'Unknown',
         ]);
     }
 
-    public function category() : BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class)->withDefault([
             'name' => 'Uncategorized',
         ]);
     }
 
-    public function source() : BelongsTo
+    public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class)->withDefault([
             'name' => 'Unknown',

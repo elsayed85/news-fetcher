@@ -30,16 +30,12 @@ Route::get('/', function (\App\Services\Content\ArticleService $service) {
     $apiService = new GuardianService();
     $articles = $apiService->fetchAndNormalizeArticles($requestBuilder);
 
-    dd(
-        $articles
-    );
-
-    $requestBuilder = (new NewsAPIRequestBuilder())
-        ->setCategory('technology')
-        ->setPage(1);
-
-    $apiService = new NewsAPIService();
-    $articles = $apiService->fetchAndNormalizeArticles($requestBuilder);
+//    $requestBuilder = (new NewsAPIRequestBuilder())
+//        ->setCategory('technology')
+//        ->setPage(1);
+//
+//    $apiService = new NewsAPIService();
+//    $articles = $apiService->fetchAndNormalizeArticles($requestBuilder);
     $models = $service->storeMultipleArticles($articles);
 
     dd(
