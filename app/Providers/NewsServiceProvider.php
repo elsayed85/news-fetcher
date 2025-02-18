@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\CacheServiceInterface;
 use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Contracts\Repositories\AuthorRepositoryInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Repositories\ArticleRepository;
 use App\Repositories\AuthorRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\SourceRepository;
+use App\Services\CacheService;
 use App\Transformers\ArticleDtoTransformer;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,10 +37,12 @@ class NewsServiceProvider extends ServiceProvider
             return new ArticleDtoTransformer(
                 $app->make(SourceRepository::class),
                 $app->make(AuthorRepository::class),
-                $app->make(CategoryRepository::class)
+                $app->make(CategoryRepository::class),
+                $app->make(CacheService::class)
             );
         });
 
+        $this->app->bind(CacheServiceInterface::class, fn() => new CacheService());
         $this->app->bind(SourceRepositoryInterface::class, fn() => new SourceRepository(new Source()));
         $this->app->bind(AuthorRepositoryInterface::class, fn() => new AuthorRepository(new Author()));
         $this->app->bind(CategoryRepositoryInterface::class, fn() => new CategoryRepository(new Category()));
