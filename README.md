@@ -50,7 +50,7 @@ docker compose up -d
 ### 5️⃣ Enter the Container
 
 ```sh
-docker exec -it news-fetcher bash
+docker exec -it news-app-container sh
 ```
 
 ### 6️⃣ Install Dependencies & Migrate Database
@@ -114,51 +114,27 @@ chmod -R 777 storage
 
 ---
 
-## Queue Management (Supervisor) ⚡
+## 🔑 Generating User Token for Testing
 
-Supervisor is used to manage the queue workers efficiently. Each provider has its own queue configuration:
+To test authenticated API requests, generate an access token:
 
-```ini
-[program:guardian]
-process_name = %(program_name)s
-command = php82 /var/www/html/artisan queue:work --queue=guardian,newsApi,nyt --sleep=3 --tries=3
-autostart = true
-autorestart = true
-stderr_logfile = /var/log/supervisor/worker.log
-stdout_logfile = /var/log/supervisor/worker.log
-numprocs = 1
-priority = 999
-startsecs = 0
-stopwaitsecs = 3600
+```sh
+php artisan generate:user-token
 ```
 
-```ini
-[program:newsApi]
-process_name = %(program_name)s
-command = php82 /var/www/html/artisan queue:work --queue=newsApi,guardian,nyt --sleep=3 --tries=3
-autostart = true
-autorestart = true
-stderr_logfile = /var/log/supervisor/worker.log
-stdout_logfile = /var/log/supervisor/worker.log
-numprocs = 1
-priority = 999
-startsecs = 0
-stopwaitsecs = 3600
+This will create a test user and return an API token that can be used for authentication.
+
+---
+
+## 🎯 Attaching User Preferences for Testing
+
+To simulate user-specific news filtering, attach preferences (categories, sources, authors) to a test user:
+
+```sh
+php artisan attach:user-preferences
 ```
 
-```ini
-[program:nyt]
-process_name = %(program_name)s
-command = php82 /var/www/html/artisan queue:work --queue=nyt,newsApi,guardian --sleep=3 --tries=3
-autostart = true
-autorestart = true
-stderr_logfile = /var/log/supervisor/worker.log
-stdout_logfile = /var/log/supervisor/worker.log
-numprocs = 1
-priority = 999
-startsecs = 0
-stopwaitsecs = 3600
-```
+This ensures the API correctly filters news articles based on user settings.
 
 ---
 
