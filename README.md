@@ -162,53 +162,30 @@ stopwaitsecs = 3600
 
 ---
 
-## Project Structure 📂
+## 🛠️ Testing Scheduled Commands
 
-```
-app
-├── Adapters
-│   ├── Providers
-│   └── Transformers
-├── Builders
-├── Console
-│   └── Commands
-│       └── Providers
-│           ├── Guardian
-│           ├── NewsApi
-│           └── Nyt
-├── Contracts
-│   ├── Adapter
-│   ├── Filters
-│   ├── Repositories
-│   └── Transformers
-├── Dtos
-├── Enums
-├── Exceptions
-│   └── News
-├── Factories
-├── Filters
-│   └── Content
-├── Http
-│   ├── Controllers
-│   │   └── News
-│   ├── Middleware
-│   ├── Requests
-│   │   └── News
-│   │       └── Content
-│   └── Resources
-│       └── News
-├── Jobs
-│   ├── Guardian
-│   ├── NewsApi
-│   └── Nyt
-├── Models
-│   └── User
-├── Providers
-├── Repositories
-├── Services
-│   ├── Content
-│   └── Providers
-└── Traits
-```
-
+```md
 ---
+
+## 🛠️ Testing Scheduled Commands
+
+To manually test the scheduled commands before running them in production, use:
+
+```sh
+php artisan schedule:test
+```
+
+This will prompt you to select a command from the available scheduled tasks, allowing you to verify that each provider
+fetches news correctly.
+
+### Example Output:
+
+```sh
+ ┌ Which command would you like to run? ─────────────────────────────────────────────────────────────────────┐
+ │ › ● '/usr/bin/php82' 'artisan' guardian:fetch-and-save 'technology' --from-date='2024-01-01' --page='1'   │
+ │   ○ '/usr/bin/php82' 'artisan' news-api:fetch-and-save 'technology'                                       │
+ │   ○ '/usr/bin/php82' 'artisan' nyt:fetch-and-save 'technology'                                            │
+ └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+  Running ['artisan' guardian:fetch-and-save 'technology' --from-date='2024-01-01' --page='1'] ... DONE (114ms)
+```
