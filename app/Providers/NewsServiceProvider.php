@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Adapters\Transformers\ArticleDtoTransformer;
 use App\Contracts\Repositories\ArticleRepositoryInterface;
 use App\Contracts\Repositories\AuthorRepositoryInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
@@ -15,6 +14,7 @@ use App\Repositories\ArticleRepository;
 use App\Repositories\AuthorRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\SourceRepository;
+use App\Transformers\ArticleDtoTransformer;
 use Illuminate\Support\ServiceProvider;
 
 class NewsServiceProvider extends ServiceProvider

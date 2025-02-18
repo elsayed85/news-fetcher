@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Adapters\Transformers;
+namespace App\Transformers;
 
-use App\Contracts\Repositories\SourceRepositoryInterface;
 use App\Contracts\Repositories\AuthorRepositoryInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
+use App\Contracts\Repositories\SourceRepositoryInterface;
 use App\Contracts\Transformers\TransformerInterface;
-use App\Dtos\ArticleDto;
 use App\Dtos\ArticleDatabaseDto;
+use App\Dtos\ArticleDto;
 
 class ArticleDtoTransformer implements TransformerInterface
 {
