@@ -34,18 +34,21 @@ class ArticleDtoTransformer implements TransformerInterface
             url: $data->url,
             imageUrl: $data->imageUrl ?? null,
             publishedAt: $data->publishedAt,
-            sourceId: $this->cacheService->rememberForever(
-                "source.{$data->getSource()}",
-                fn() => $this->sourceRepository->findOrCreate($data->getSource())->getKey()
-            ),
-            authorId: $this->cacheService->rememberForever(
-                "author.{$data->getAuthor()}",
-                fn() => $this->authorRepository->findOrCreate($data->getAuthor())->getKey()
-            ),
-            categoryId: $this->cacheService->rememberForever(
-                "category.{$data->getCategory()}",
-                fn() => $this->categoryRepository->findOrCreate($data->getCategory())->getKey()
-            )
+            sourceId: $this->getEntityId($data->getSource(), 'source', $this->sourceRepository),
+            authorId: $this->getEntityId($data->getAuthor(), 'author', $this->authorRepository),
+            categoryId: $this->getEntityId($data->getCategory(), 'category', $this->categoryRepository)
+        );
+    }
+
+    private function getEntityId(?string $name, string $cacheKey, $repository): ?int
+    {
+        if (empty($name)) {
+            return null;
+        }
+
+        return $this->cacheService->rememberForever(
+            "$cacheKey.$name",
+            fn() => $repository->findOrCreate($name)->getKey()
         );
     }
 }
