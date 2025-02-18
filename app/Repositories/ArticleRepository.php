@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Adapters\Transformers\ArticleDtoTransformer;
 use App\Contracts\Repositories\{ArticleRepositoryInterface};
 use App\Dtos\ArticleDto;
 use App\Models\Article;
+use App\Transformers\ArticleDtoTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
