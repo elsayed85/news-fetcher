@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\AuthorRepositoryInterface;
 use App\Models\Author;
-use Illuminate\Support\Facades\Cache;
 
 class AuthorRepository extends BaseRepository implements AuthorRepositoryInterface
 {
@@ -15,8 +14,6 @@ class AuthorRepository extends BaseRepository implements AuthorRepositoryInterfa
 
     public function findOrCreate(string $name): Author
     {
-        return Cache::rememberForever("author_{$name}", function () use ($name) {
-            return Author::firstOrCreate(['name' => $name]);
-        });
+        return Author::firstOrCreate(['name' => $name]);
     }
 }
