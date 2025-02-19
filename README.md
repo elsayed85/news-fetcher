@@ -165,3 +165,15 @@ fetches news correctly.
 
   Running ['artisan' guardian:fetch-and-save 'technology' --from-date='2024-01-01' --page='1'] ... DONE (114ms)
 ```
+
+---
+
+## 🚀 Possible Improvements
+
+1️⃣ **Add a Custom Logging Layer for Tracking**  
+2️⃣ **Filament Admin Panel for Full Control ✅**  
+3️⃣ **Generalized Category Mapping**  
+4️⃣ **Filter by API Source**  
+5️⃣ **Authentication Routes (Login, Register, Forgot Password, Reset, Logout)**  
+6️⃣ **User Preferences Update API**  
+7️⃣ **Setup Laravel Horizon for Queue Monitoring ✅**  
