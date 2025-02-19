@@ -102,10 +102,20 @@ chmod -R 777 storage
 
 ### ✅ Admin Panel (Filament)
 
+![Admin Panel Dark Model](screenshots/admin-dark.png)
+![Admin Panel Light Model](screenshots/admin-light.png)
+
 - **Filament Admin Panel** for managing users, articles, categories, sources, and authors.
 - to access the admin panel, visit `/admin/login` and login with the default credentials:
     - **Email:** ` admin@news.com`
     - **Password:** `password`
+
+### Queue Monitoring (Laravel Horizon)
+
+![Laravel Horizon](screenshots/horizon.png)
+
+- **Laravel Horizon** provides a dashboard to monitor queue jobs.
+- To access the dashboard, visit `/horizon` and login to admin first using the previous credentials.
 
 ---
 

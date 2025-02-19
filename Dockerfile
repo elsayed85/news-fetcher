@@ -38,6 +38,8 @@ RUN apk add --no-cache \
   php82-sockets \
   php82-iconv \
   php82-pdo_sqlite\
+  php82-pcntl \
+    php82-posix \
   supervisor \
   busybox-extras
 
