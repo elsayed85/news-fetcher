@@ -100,6 +100,13 @@ chmod -R 777 storage
 
 📌 **Full API Documentation:** [Postman Docs](https://documenter.getpostman.com/view/30884782/2sAYXFiHMc)
 
+### ✅ Admin Panel (Filament)
+
+- **Filament Admin Panel** for managing users, articles, categories, sources, and authors.
+- to access the admin panel, visit `/admin/login` and login with the default credentials:
+    - **Email:** ` admin@news.com`
+    - **Password:** `password`
+
 ---
 
 ## Design Patterns Used 🏗️
